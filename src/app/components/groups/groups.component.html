@@ -1,0 +1,93 @@
+<div class="container-fluid">
+  <ol class="breadcrumb">
+    <li>
+      <a routerLink="/" routerLinkActive="active">Home</a>
+    </li>
+    <li class="active">Groups</li>
+  </ol>
+  <div class="row">
+    <div class="col-lg-12">
+      <div *ngFor="let alert of alerts">
+        <alert [type]="alert.type" [dismissOnTimeout]="alert.timeout" (onClosed)="onClosed(alert)">{{ alert.msg }}</alert>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-lg-6 col-md-offset-3">
+
+      <form [formGroup]="groupForm" class="form-horizontal">
+        <div class="form-group">
+          <legend>{{updating ? 'Updating Group' : 'Add Group'}}</legend>
+        </div>
+        <div class="form-group">
+          <label for="inputGroupName" class="col-sm-2 control-label">Group Name</label>
+          <div class="col-sm-2">
+            <input type="text" name="" id="inputGroupName" class="form-control" required="required" formControlName="name">
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="inputGroupQuantity" class="col-sm-2 control-label">Group Quantity</label>
+          <div class="col-sm-2">
+            <input type="text" name="" id="inputGroupQuantity" class="form-control" required="required" formControlName="quantity">
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="inputGcName" class="col-sm-2 control-label">Group Coordinator Name</label>
+          <div class="col-sm-6">
+            <input type="text" name="" id="inputGcName" class="form-control" required="required" formControlName="gc">
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="inputGlName" class="col-sm-2 control-label">Group Leader Name</label>
+          <div class="col-sm-6">
+            <input type="text" name="" id="inputGlName" class="form-control" required="required" formControlName="gl">
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="col-sm-10">
+            <input type="hidden" formControlName="id">
+            <button type="submit" class="btn btn-primary" [disabled]="groupForm.invalid" (click)="updating ? updateGroup() : save()">{{updating ? 'Update' : 'Save'}}</button>
+            <button class="btn btn-warning" [disabled]="!groupForm.dirty && !groupForm.pristine" (click)="reset()">Clear</button>
+            
+            <button type="button" class="btn btn-info" (click)="updating=updating ? false : true">Toggle Action</button>
+            
+          </div>
+        </div>
+      </form>
+
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-lg-4" *ngFor="let group of groups$ | async">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h3 class="panel-title">{{ group.name }}</h3>
+        </div>
+        <div class="panel-body">
+          GL: {{group.gl}}
+          <br> GC: {{group.gc}}
+          <br> No. of Student: {{group.quantity}}
+        </div>
+        <!-- <div class="panel-footer"><span class="glyphicon glyphicon-remove-sign" aria-hidden="true" (click)="remove(group.id)"></span></div> -->
+        <div class="panel-footer clearfix">
+          <div class="pull-right">
+            <button type="button" class="btn btn-danger btn-sm" (click)="openModal(template)">
+              <span class="glyphicon glyphicon-remove-sign" aria-hidden="true"></span> Delete
+            </button>
+            <button type="button" class="btn btn-info btn-sm" (click)="fill(group)">
+              <span class="glyphicon glyphicon-tasks" aria-hidden="true"></span> Update
+            </button>
+          </div>
+        </div>
+        <!-- Modal overlay -->
+        <ng-template #template>
+          <div class="modal-body text-center">
+            <p>Do you want to confirm?</p>
+            <button type="button" class="btn btn-default" (click)="remove(group.id)">Yes</button>
+            <button type="button" class="btn btn-primary" (click)="decline()">No</button>
+          </div>
+        </ng-template>
+      </div>
+    </div>
+  </div>
+</div>

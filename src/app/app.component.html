@@ -3,48 +3,24 @@
   <div class="container-fluid">
     <div class="navbar-header">
       <a class="navbar-brand">
-        <img src="../../../assets/logo.svg" class="img-responsive" style="width: 23px;">
+        <img src="../../../assets/pblogo.png" class="img-responsive" style="width: 80px;">
       </a>
-      <a routerLink="/" routerLinkActive="active"><span class="navbar-brand">Angular + Bootstrap</span></a>
+      <a routerLink="/" routerLinkActive="active"><span class="navbar-brand">PB Attendance System</span></a>
     </div>
     <ul class="nav navbar-nav">
-      <li class="active">
-        <a href="#">
-          Link
-          <span class="sr-only">(current)</span>
-        </a>
-      </li>
-      <li>
-        <a routerLink="/test" routerLinkActive="active">Test</a>
-      </li>
-      <li class="dropdown" dropdown>
 
-        <a dropdownToggle role="button">
+        <a routerLink="/" routerLinkActive="active"><li class="list-group-item">Home</li></a>
 
-          Dropdown
-          <span class="caret"></span>
-        </a>
-        <ul *dropdownMenu class="dropdown-menu">
+      <a routerLink="/groups" routerLinkActive="active"><li class="list-group-item">List Groups</li></a>
 
-          <li>
-            <a href="#">Action</a>
-          </li>
-          <li>
-            <a href="#">Another action</a>
-          </li>
-          <li>
-            <a href="#">Something else here</a>
-          </li>
-          <li role="separator" class="divider"></li>
-          <li>
-            <a href="#">Separated link</a>
-          </li>
-          <li role="separator" class="divider"></li>
-          <li>
-            <a href="#">One more separated link</a>
-          </li>
-        </ul>
-      </li>
+      <a routerLink="/gl"><li class="list-group-item">List GL / AGL</li></a>
+
+      <a routerLink="/modules"><li class="list-group-item">List Modules</li></a>
+
+      <a routerLink="/attendances" routerLinkActive="active"><li class="list-group-item">Sample Attendance (view by GL)</li></a>
+
+      <a routerLink="/attendancesLecturerView"><li class="list-group-item">Sample Attendance (view by ML)</li></a>
+
     </ul>
   </div>
 </nav>
